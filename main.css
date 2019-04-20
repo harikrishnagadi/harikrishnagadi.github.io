@@ -1,0 +1,28 @@
+body{
+  background-color:black;
+}
+
+.line{
+  margin-top: 80px;
+  margin-left: 50px;
+  width: 1000px;
+  border: 2px solid white;
+
+}
+
+.heading{
+  margin-top: 50px;
+  margin-left: 50px;
+  color: white;
+  font-size: 30px;
+  font-family: sans-serif;
+  font-style: normal;
+}
+
+.Map{
+  margin-top: 30px;
+  margin-left: 50px;
+  width: 1000px;
+  height: 500px;
+  background-color: white;
+}
