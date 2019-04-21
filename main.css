@@ -1,28 +1,119 @@
 body{
-  background-color:black;
-}
 
-.line{
-  margin-top: 80px;
-  margin-left: 50px;
-  width: 1000px;
-  border: 2px solid white;
-
-}
-
-.heading{
-  margin-top: 50px;
-  margin-left: 50px;
-  color: white;
-  font-size: 30px;
+  background-image:url("images/back.jpg");
+  background-position: center;
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: sans-serif;
-  font-style: normal;
+  font-size: 30px;
 }
+
 
 .Map{
-  margin-top: 30px;
+  margin-top: 1100px;
   margin-left: 50px;
+  margin-bottom: 50px;
   width: 1000px;
   height: 500px;
   background-color: white;
+  z-index:3;
+  box-shadow: 0 4px 8px 0 rgba(1,2,2,0.4);
+  transition: 0.3s;
+}
+
+.Map:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.8);
+
+}
+
+
+.card1{
+   margin-top: -550px;
+   margin-left: 1100px;
+   width:180px;
+   height:150px;
+   background-color: white;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s;
+
+}
+.card1:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,8.8);
+}
+.text1{
+  padding: 10px;
+}
+.value1{
+    padding: 10px;
+    margin-left: 50px;
+}
+.time1{
+  position: absolute;
+  margin-top: 0px;
+  margin-left: 5px;
+   font-size:8px;
+   font-style: italic;
+   color: black;
+
+}
+.card2{
+   margin-top: 20px;
+   margin-left: 1100px;
+   width:180px;
+   height:150px;
+   background-color: white;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s;
+}
+.card2:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.8);
+}
+.text2{
+  padding: 10px;
+  padding-left: 50px;
+
+}
+.value2{
+    padding: 10px;
+    margin-left: 50px;
+}
+.time2{
+  position: absolute;
+  margin-top: 0px;
+  margin-left: 5px;
+   font-size:8px;
+   font-style: italic;
+   color: black;
+
+}
+.card3{
+   margin-top: 20px;
+   margin-left: 1100px;
+   width:180px;
+   height:150px;
+   background-color: white;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s;
+
+}
+.card3:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.8);
+}
+.text3{
+  padding: 10px;
+  padding-left: 50px;
+}
+.value3{
+    padding: 10px;
+    margin-left: 50px;
+}
+.time3{
+  position: absolute;
+  margin-top: 0px;
+  margin-left: 5px;
+   font-size:8px;
+   font-style: italic;
+   color: black;
+
 }

@@ -2,30 +2,76 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
     <link rel="stylesheet" href="/main.css">
   </head>
   <body >
+    <section class="main">
+      <div class="line">
+      </div>
 
-   <span>
-     <div class="line">
-     </div>
-     <div class='heading' id="heading">
-       Map
-     </div>
-     <<div class="Map" id="map">
-     </div>
-   </span>
+      <div class="Map" id="map"></div>
+
+      <div class="card1" id="card1">
+        <div class='text1' id='text1'>
+        Pedistrians
+      </div>
+        <div class='value1' id='value1'>
+        0
+      </div>
+      <div class='time1' id='time1'>
+      Last updated:
+    </div>
+    </div>
+      <div class="card2" id="card2">
+        <div class='text2' id='text2'>
+        cars
+      </div>
+        <div class='value2' id='value2'>
+        0
+      </div>
+      <div class='time2' id='time2'>
+      Last updated:
+    </div>
+      </div>
+      <div class="card3" id="card3">
+        <div class='text3' id='text3'>
+        Bikes
+      </div>
+        <div class='value3' id='value3'>
+        0
+      </div>
+      <div class='time3' id='time3'>
+      Last updated:
+    </div>
+      </div>
+
+    </section>
+
+
+
+
+
 
   </body>
   <script src="myScript.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBea-1jOCzW8Zwegu6-OD6r3z7ZpmLQQXc&callback=initMap"
     async defer></script>
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
 
+
  <!-- Add Firebase products that you want to use -->
  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-database.js"></script>
+
 
 </html>
