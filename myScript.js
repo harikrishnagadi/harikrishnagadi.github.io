@@ -35,7 +35,7 @@ function loadfire(){
    }
  });
 
-ref.once('value',function (snapshot){
+ref.on('value',function (snapshot){
    //console.log(snapshot.val()["objects"]['person']['count'])
    data  = snapshot.val()["objects"];
    for (key in data){
