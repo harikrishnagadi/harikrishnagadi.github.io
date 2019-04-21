@@ -1,6 +1,6 @@
 
 
-var uluru;
+var uluru,storage,imageurl;
 var map,infowindow,marker;
 function loadfire(){
 
@@ -15,9 +15,12 @@ function loadfire(){
     serviceAccount : "./objectdetect-d588a-firebase-adminsdk-jt7q4-aa2bf3e778.json"
   };
   firebase.initializeApp(config);
+  storage = firebase.storage();
+  storageRef = storage.ref('camera1/latest_image')
 
 
- contentString='<div><img src="images/my.png" alt="No latest Detection" style="width:300px;height:300px;"></div>'
+
+
 
  var ref = firebase.database().ref('/cameras/camera1');
  //console.log(ref)
@@ -27,9 +30,7 @@ function loadfire(){
       map.setCenter(snapshot.val()["loc"]);
       marker = new google.maps.Marker({position:snapshot.val()["loc"] , animation: google.maps.Animation.DROP,map: map});
      marker.addListener('click', togglepop);
-     infowindow = new google.maps.InfoWindow({
-          content: contentString
-    });
+
      var trafficLayer = new google.maps.TrafficLayer();
      trafficLayer.setMap(map);
    }
@@ -37,7 +38,8 @@ function loadfire(){
 
 ref.on('value',function (snapshot){
    //console.log(snapshot.val()["objects"]['person']['count'])
-     console.log("hi")
+     //console.log("hi")
+
    data  = snapshot.val()["objects"];
    for (key in data){
 
@@ -61,15 +63,38 @@ ref.on('value',function (snapshot){
 
 }
 
+function setimage(){
+
+  storageRef.getDownloadURL().then(function(url) {
+
+
+    contentString='<div><img id="Image" src="'+url+ '" alt="No latest Detection" style="width:300px;height:300px;"></div>'
+    infowindow = new google.maps.InfoWindow({
+          content: contentString
+    });
+    console.log(contentString)
+
+    //img.src = url;
+  }).catch(function(error) {
+    console.log(error)
+  });
+
+
+}
+
+
 function togglepop() {
         //alert("clicked")
+
         infowindow.open(map,marker)
+
       }
 
 function initMap() {
         // Styles a map in night mode.
 
         loadfire();
+        setimage();
          uluru = {lat: 17.726367, lng: 83.320782};
       // The marker, positioned at Uluru
         map = new google.maps.Map(document.getElementById('map'), {
