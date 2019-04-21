@@ -37,6 +37,7 @@ function loadfire(){
 
 ref.on('value',function (snapshot){
    //console.log(snapshot.val()["objects"]['person']['count'])
+     console.log("hi")
    data  = snapshot.val()["objects"];
    for (key in data){
 
@@ -67,7 +68,7 @@ function togglepop() {
 
 function initMap() {
         // Styles a map in night mode.
-        console.log("hi")
+
         loadfire();
          uluru = {lat: 17.726367, lng: 83.320782};
       // The marker, positioned at Uluru
