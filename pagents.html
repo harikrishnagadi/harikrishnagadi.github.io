@@ -111,18 +111,19 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 0.5rem;
   margin: 2.5rem 0 3.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .pipe-stage {
   text-align: center;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.25rem;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 8px;
-  min-width: 140px;
+  flex: 1;
+  min-width: 0;
   transition: border-color 0.3s, transform 0.3s;
 }
 .pipe-stage:hover {
@@ -399,9 +400,9 @@ nav {
   .hero h1 { font-size: 1.8rem; }
   .hero-sub { font-size: 0.95rem; }
 
-  .pipeline { flex-direction: column; gap: 0; }
+  .pipeline { flex-direction: column; flex-wrap: nowrap; gap: 0; }
   .pipe-arrow { transform: rotate(90deg); padding: 0.3rem 0; }
-  .pipe-stage { min-width: 100%; }
+  .pipe-stage { width: 100%; flex: none; }
 
   .features { grid-template-columns: 1fr; }
   .tech-grid { grid-template-columns: 1fr; }
@@ -493,18 +494,17 @@ nav {
       <div class="demo-card">
         <video class="demo-video" src="pagents_demo2.mp4" controls preload="metadata" playsinline></video>
         <div class="demo-info">
-          <div class="demo-label">Demo 2 &middot; Full Pipeline with Dashboard</div>
-          <div class="demo-title">End-to-End Proactive Agent Pipeline</div>
+          <div class="demo-label">Demo 2 &middot; Proactive Caller Assistant</div>
+          <div class="demo-title">Context-Aware AI Agent for Phone Calls</div>
           <div class="demo-desc">
-            Complete system demonstration showing the four-stage pipeline: perception (biometric gauges), reasoning (LLM deliberation with latency metrics), tool execution (rest stop lookup, navigation), and action (intervention overlay with countdown, climate adjustment).
-            Features a real-time WebSocket dashboard with HUD-style visualization, Leaflet navigation map, and action log.
+            Context-aware AI agent that proactively assists during phone calls with relevant information, calendar context, and smart suggestions across devices. The system anticipates what the driver needs during a call and surfaces relevant data without being asked.
           </div>
           <div class="demo-tags">
-            <span class="demo-tag">FastAPI</span>
-            <span class="demo-tag">WebSocket</span>
+            <span class="demo-tag">Proactive AI</span>
+            <span class="demo-tag">Multi-Device</span>
+            <span class="demo-tag">Context-Aware</span>
+            <span class="demo-tag">Real-time</span>
             <span class="demo-tag">LLM Reasoning</span>
-            <span class="demo-tag">Dashboard</span>
-            <span class="demo-tag">Leaflet.js</span>
           </div>
         </div>
       </div>
