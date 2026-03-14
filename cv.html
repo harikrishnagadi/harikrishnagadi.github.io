@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hari Krishna Gadi — CV</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 14mm 16mm 12mm 16mm;
+  }
+
+  :root {
+    --gold: #9a7200;
+    --gold-pale: #f7edcf;
+    --gold-bg: #faf5e8;
+    --ink: #111;
+    --ink-2: #2e2e2e;
+    --ink-3: #5c5c5c;
+    --ink-4: #8a8a8a;
+    --rule: #ccc;
+    --rule-lt: #e5e5e5;
+    --white: #fff;
+    --ff: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --fm: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  body {
+    font-family: var(--ff);
+    font-size: 10pt;
+    line-height: 1.4;
+    color: var(--ink);
+    background: var(--white);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a { color: var(--gold); text-decoration: none; }
+
+  /* ── SHEET (screen preview wrapper) ── */
+  .sheet {
+    width: 100%;
+    max-width: 178mm; /* A4 minus margins: 210 - 16 - 16 */
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  .h-wrap {
+    border-bottom: 2.5px solid var(--gold);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .h-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .h-name {
+    font-size: 28pt;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .h-name strong {
+    font-weight: 800;
+  }
+
+  .h-title {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+
+  .h-info {
+    text-align: right;
+    font-size: 8.5pt;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+  .h-info a { color: var(--ink-2); }
+
+  /* ── ICONS ── */
+  .ico {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    margin-right: 2px;
+  }
+
+  /* ── SECTIONS ── */
+  .s { margin-bottom: 16px; }
+
+  .s-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .s-tag {
+    font-family: var(--fm);
+    font-size: 7pt;
+    font-weight: 700;
+    color: var(--gold);
+    background: var(--gold-pale);
+    padding: 2px 5px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  .s-label {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .s-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── PUBLICATIONS ── */
+  .p-list {
+    display: block;
+  }
+
+  .p-card {
+    display: block;
+    padding: 5px 8px;
+    border-left: 2.5px solid var(--gold);
+    background: var(--gold-bg);
+    border-radius: 0 3px 3px 0;
+    margin-bottom: 4px;
+  }
+
+  .p-top {
+    display: block;
+  }
+
+  .p-venue {
+    font-family: var(--fm);
+    font-size: 7pt;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+
+  .p-name {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .p-sub {
+    font-size: 8pt;
+    color: var(--ink-3);
+    margin-top: 1px;
+  }
+  .p-author {
+    font-family: var(--fm);
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+  }
+  .p-author-first {
+    color: var(--white);
+    background: var(--gold);
+  }
+  .p-author-co {
+    color: var(--gold);
+    background: var(--gold-pale);
+    border: 1px solid rgba(154,114,0,0.2);
+  }
+  .p-sub a {
+    font-family: var(--fm);
+    font-size: 7pt;
+    font-weight: 600;
+    color: var(--gold);
+    border: 1px solid rgba(154,114,0,0.25);
+    padding: 0px 4px;
+    border-radius: 2px;
+    margin-left: 3px;
+  }
+  .p-sub .ico { margin-right: 1px; }
+
+  /* ── TWO COLUMNS (float-based for WeasyPrint page breaking) ── */
+  .two { overflow: hidden; }
+  .two-left  { float: left; width: 53%; }
+  .two-right { float: right; width: 44%; }
+
+  /* ── TIMELINE ── */
+  .tl {
+    position: relative;
+    padding-left: 14px;
+  }
+
+  .tl::after {
+    content: "";
+    position: absolute;
+    left: 3.5px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--rule-lt) 100%);
+  }
+
+  .t {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .t:last-child { margin-bottom: 0; }
+
+  .t::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    background: var(--white);
+    z-index: 1;
+    transform: translateX(0.3px);
+  }
+  .t:first-child::before {
+    background: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold-pale);
+  }
+
+  .t-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .t-role {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .t-when {
+    font-family: var(--fm);
+    font-size: 7pt;
+    color: var(--ink-4);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .t-org {
+    font-size: 9pt;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  .t-loc {
+    font-size: 7.5pt;
+    color: var(--ink-4);
+  }
+
+  .t-pts {
+    list-style: none;
+    margin-top: 2px;
+  }
+
+  .t-pts li {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    padding-left: 9px;
+    position: relative;
+    line-height: 1.4;
+    margin-bottom: 1px;
+  }
+
+  .t-pts li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5.5px;
+    width: 4px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* ── EDUCATION ── */
+  .e-courses {
+    font-size: 8pt;
+    color: var(--ink-3);
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+
+  .e-box {
+    margin-top: 3px;
+    padding: 3px 6px;
+    background: var(--gold-bg);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .e-box-tag {
+    font-family: var(--fm);
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .e-box-txt {
+    font-size: 7.5pt;
+    color: var(--ink-2);
+  }
+
+  /* ── SKILLS ── */
+  .sk-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 14px;
+  }
+
+  .sk { width: calc(50% - 7px); }
+
+  .sk-cat {
+    font-family: var(--fm);
+    font-size: 7pt;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .sk-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+
+  .sk-t {
+    font-size: 8pt;
+    color: var(--ink-2);
+    background: var(--gold-bg);
+    border: 1px solid var(--rule-lt);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  /* ── LANGUAGES ── */
+  .l-row {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .l-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .l-name {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .l-lvl {
+    font-family: var(--fm);
+    font-size: 7.5pt;
+    color: var(--ink-4);
+  }
+
+  .l-dots { display: flex; gap: 2px; }
+
+  .l-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+  .l-dot.f { background: var(--gold); }
+
+  /* ── SCREEN CHROME ── */
+  @media screen {
+    html { background: #e8e8e8; }
+    body { padding: 20mm 16mm 70px 16mm; }
+    .sheet {
+      max-width: 178mm;
+      padding: 14mm 16mm;
+      background: #fff;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+    }
+  }
+
+  .bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 999;
+    font-family: var(--ff);
+  }
+  .bar a { font-size: 13px; color: #777; }
+  .bar a:hover { color: var(--gold); }
+  .bar span { font-size: 13px; color: #555; }
+
+  @media print {
+    .bar { display: none !important; }
+    body { padding: 0; }
+    html { background: #fff; }
+    .sheet { box-shadow: none; margin: 0; padding: 0; max-width: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet" id="cv">
+
+  <!-- HEADER -->
+  <div class="h-wrap">
+    <div class="h-row">
+      <div>
+        <div class="h-name">Hari Krishna <strong>Gadi</strong></div>
+        <div class="h-title">PhD Researcher — Huawei Technologies, Munich</div>
+      </div>
+      <div class="h-info">
+        <img class="ico" src="icons/tw-mail.svg" alt=""> <a href="mailto:harikrishna.gadi@tum.de">harikrishna.gadi@tum.de</a><br>
+        <img class="ico" src="icons/tw-phone.svg" alt=""> +49 151 2975 2881<br>
+        <img class="ico" src="icons/tw-linkedin.svg" alt=""> <a href="https://www.linkedin.com/in/hari-krishna-gadi-b75567138/">linkedin.com/in/hari-krishna-gadi</a><br>
+        <img class="ico" src="icons/tw-location.svg" alt=""> Munich, Germany
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div style="font-size: 9pt; color: var(--ink-2); line-height: 1.45; margin-bottom: 12px; padding: 6px 0;">
+    AI Researcher at Huawei Technologies with first-author publications at ICLR and SIGSPATIAL. Building deep learning systems spanning computer vision, hyperbolic representation learning, and LLM evaluation.
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="s">
+    <div class="s-bar">
+      <span class="s-tag">01</span>
+      <span class="s-label">Publications</span>
+      <span class="s-rule"></span>
+    </div>
+    <div class="p-list">
+      <div class="p-card">
+        <div class="p-top">
+          <span class="p-venue">ICLR 2026</span>
+          <span class="p-name">HierLoc: Image-Based Geolocation Trained in Hyperbolic Space</span>
+        </div>
+        <div class="p-sub"><span class="p-author p-author-first">First Author</span> · Rio de Janeiro, Brazil · <a href="https://harikrishnagadi.github.io/iclr-website/"><img class="ico" src="icons/tw-globe.svg" alt="">Site</a> <a href="https://arxiv.org/abs/2601.23064"><img class="ico" src="icons/tw-paper.svg" alt="">arXiv</a></div>
+      </div>
+      <div class="p-card">
+        <div class="p-top">
+          <span class="p-venue">SIGSPATIAL '24</span>
+          <span class="p-name">Road Networks Matching Using Embeddings</span>
+        </div>
+        <div class="p-sub"><span class="p-author p-author-first">First Author</span> · Atlanta, USA · <a href="https://dl.acm.org/doi/epdf/10.1145/3687123.3698283"><img class="ico" src="icons/tw-paper.svg" alt="">ACM</a></div>
+      </div>
+      <div class="p-card">
+        <div class="p-top">
+          <span class="p-venue">EMNLP 2025</span>
+          <span class="p-name">Turnback: Evaluation of GeoSpatial Cognition of Current LLMs</span>
+        </div>
+        <div class="p-sub"><span class="p-author p-author-co">Co-Author</span> · Suzhou, China · <a href="https://arxiv.org/abs/2509.18173"><img class="ico" src="icons/tw-paper.svg" alt="">arXiv</a></div>
+      </div>
+      <div class="p-card">
+        <div class="p-top">
+          <span class="p-venue">IBPSA 2021</span>
+          <span class="p-name">Occupant Behaviour Prediction Using Deep Learning and a Variety of Data Sources</span>
+        </div>
+        <div class="p-sub"><span class="p-author p-author-co">Co-Author</span> · Bruges, Belgium · <a href="https://publications.ibpsa.org/conference/paper/?id=bs2021_30345"><img class="ico" src="icons/tw-paper.svg" alt="">IBPSA</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO COLUMNS -->
+  <div class="two">
+
+    <!-- LEFT — EXPERIENCE -->
+    <div class="two-left">
+      <div class="s">
+        <div class="s-bar">
+          <span class="s-tag">02</span>
+          <span class="s-label">Experience</span>
+          <span class="s-rule"></span>
+        </div>
+        <div class="tl">
+          <div class="t">
+            <div class="t-row">
+              <span class="t-role">PhD Researcher</span>
+              <span class="t-when">Dec 2022 — Present</span>
+            </div>
+            <div class="t-org">Huawei Technologies Ltd</div>
+            <div class="t-loc">Munich, Germany</div>
+            <ul class="t-pts">
+              <li>First-author papers at ICLR'26 and SIGSPATIAL'24</li>
+              <li>Co-authored LLM geospatial benchmark (EMNLP'25)</li>
+              <li>GPU cluster administration with private networking</li>
+              <li>Rust-based PostgreSQL extension for geospatial ops</li>
+              <li>Proactive AI agents for multi-device assistance <a href="pagents.html" style="font-family:var(--fm);font-size:7pt;font-weight:600;color:var(--gold);border:1px solid rgba(154,114,0,0.25);padding:0px 4px;border-radius:2px;">Demo</a></li>
+            </ul>
+          </div>
+          <div class="t">
+            <div class="t-row">
+              <span class="t-role">Research Intern / Thesis</span>
+              <span class="t-when">Jan — Jul 2022</span>
+            </div>
+            <div class="t-org">Huawei Technologies, Munich Research Centre</div>
+            <ul class="t-pts">
+              <li>Evaluated SOTA road network conflation methods</li>
+              <li>Compared traditional vs. optimisation-based approaches</li>
+            </ul>
+          </div>
+          <div class="t">
+            <div class="t-row">
+              <span class="t-role">Student Research Assistant</span>
+              <span class="t-when">Jan 2020 — Jun 2022</span>
+            </div>
+            <div class="t-org">TU Munich — Energy Efficient Design</div>
+            <ul class="t-pts">
+              <li>ML models for occupant behaviour prediction</li>
+              <li>CityGML LOD2 Rhino plugin (Python)</li>
+              <li>3D point cloud processing (CloudCompare, FME)</li>
+            </ul>
+          </div>
+          <div class="t">
+            <div class="t-row">
+              <span class="t-role">GIS Data Analyst & Developer</span>
+              <span class="t-when">Dec 2018 — Sep 2019</span>
+            </div>
+            <div class="t-org">StanPlus Technologies</div>
+            <div class="t-loc">Hyderabad, India</div>
+            <ul class="t-pts">
+              <li>Full-stack GIS web app (JS, Node, PostGIS, GDAL)</li>
+            </ul>
+          </div>
+          <div class="t">
+            <div class="t-row">
+              <span class="t-role">React Native & GIS Developer</span>
+              <span class="t-when">May — Jun 2018</span>
+            </div>
+            <div class="t-org">AP Space Application Centre</div>
+            <div class="t-loc">Vijayawada, India</div>
+            <ul class="t-pts">
+              <li>Android GIS app (React Native) + backend (Node, PostGIS)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LANGUAGES (below experience) -->
+        <div class="s" style="margin-top: 10px;">
+          <div class="s-bar">
+            <span class="s-tag">05</span>
+            <span class="s-label">Languages</span>
+            <span class="s-rule"></span>
+          </div>
+          <div class="l-row">
+            <div class="l-item">
+              <span class="l-name">Telugu</span><span class="l-lvl">Native</span>
+              <div class="l-dots"><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div></div>
+            </div>
+            <div class="l-item">
+              <span class="l-name">Hindi</span><span class="l-lvl">Native</span>
+              <div class="l-dots"><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div></div>
+            </div>
+            <div class="l-item">
+              <span class="l-name">English</span><span class="l-lvl">C1</span>
+              <div class="l-dots"><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot"></div></div>
+            </div>
+            <div class="l-item">
+              <span class="l-name">German</span><span class="l-lvl">B2</span>
+              <div class="l-dots"><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot f"></div><div class="l-dot"></div><div class="l-dot"></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT — EDUCATION, SKILLS -->
+    <div class="two-right">
+
+      <div class="s">
+        <div class="s-bar">
+          <span class="s-tag">03</span>
+          <span class="s-label">Education</span>
+          <span class="s-rule"></span>
+        </div>
+        <div class="tl">
+          <div class="t">
+            <div class="t-row">
+              <span class="t-role">M.Sc. Geodesy & Geoinformation</span>
+              <span class="t-when">2019 — 2022</span>
+            </div>
+            <div class="t-org">Technische Universität München</div>
+            <div class="e-courses">Deep CNNs · Kalman Filter · Optimisation · GNSS · Signal Analysis · Image Processing · ML · Photogrammetry</div>
+            <div class="e-box">
+              <div class="e-box-tag">Thesis</div>
+              <div class="e-box-txt">Road Network Conflation: State-of-the-Art Methods Evaluation</div>
+            </div>
+          </div>
+          <div class="t">
+            <div class="t-row">
+              <span class="t-role">B.Tech. Geoinformatics</span>
+              <span class="t-when">2015 — 2019</span>
+            </div>
+            <div class="t-org">Andhra University</div>
+            <div class="e-courses">GIS · Remote Sensing · ML · AI · Web Dev · DBMS · Cartography · Java · C++ · Python</div>
+            <div class="e-box">
+              <div class="e-box-tag">Project</div>
+              <div class="e-box-txt">Real-time traffic analysis via YOLO transfer learning</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s">
+        <div class="s-bar">
+          <span class="s-tag">04</span>
+          <span class="s-label">Skills</span>
+          <span class="s-rule"></span>
+        </div>
+        <div class="sk-wrap">
+          <div class="sk">
+            <div class="sk-cat">Programming</div>
+            <div class="sk-tags">
+              <span class="sk-t">Python</span><span class="sk-t">C++</span><span class="sk-t">Rust</span><span class="sk-t">JavaScript</span><span class="sk-t">SQL</span><span class="sk-t">AI Programming</span>
+            </div>
+          </div>
+          <div class="sk">
+            <div class="sk-cat">ML & Research</div>
+            <div class="sk-tags">
+              <span class="sk-t">Agentic AI</span><span class="sk-t">Deep Learning</span><span class="sk-t">Computer Vision</span><span class="sk-t">Multimodal</span><span class="sk-t">LLMs</span><span class="sk-t">Proactive Agents</span>
+            </div>
+          </div>
+          <div class="sk">
+            <div class="sk-cat">Infrastructure</div>
+            <div class="sk-tags">
+              <span class="sk-t">Docker</span><span class="sk-t">Linux</span><span class="sk-t">GPU Clusters</span><span class="sk-t">PostgreSQL</span><span class="sk-t">MLOps</span><span class="sk-t">System Architecture</span>
+            </div>
+          </div>
+          <div class="sk">
+            <div class="sk-cat">Geospatial</div>
+            <div class="sk-tags">
+              <span class="sk-t">GIS</span><span class="sk-t">GDAL</span><span class="sk-t">GNSS</span><span class="sk-t">Point Clouds</span><span class="sk-t">Remote Sensing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<!-- TOOLBAR -->
+<div class="bar" id="toolbar">
+  <a href="index.html">← Back to website</a>
+  <span>Preview</span>
+  <a href="Hari_Krishna_Gadi_CV.pdf" download style="font-family:var(--ff);font-size:13px;font-weight:600;color:#fff;background:var(--gold);border:none;padding:9px 30px;border-radius:6px;text-decoration:none;">Download PDF</a>
+</div>
+
+</body>
+</html>

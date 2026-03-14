@@ -1,54 +1,1501 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>FNA</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- font awesome cdn link -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hari Krishna Gadi — PhD Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1115;
+  --bg-elevated: #181b21;
+  --bg-card: #1e2128;
+  --accent: #f0c640;
+  --accent-dim: rgba(240, 198, 64, 0.12);
+  --accent-glow: rgba(240, 198, 64, 0.06);
+  --text: #eaedf3;
+  --text-secondary: #a0a8b8;
+  --text-muted: #5c6478;
+  --border: rgba(255,255,255,0.06);
+  --border-accent: rgba(240, 198, 64, 0.2);
+  --sans: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, sans-serif;
+  --mono: 'SF Mono', 'IBM Plex Mono', 'Menlo', monospace;
+}
 
-        <!-- Custom css file link -->
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-        <header>
-            <a href="#" class="logo"><span>FNA</span>Networking</a>
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-            <input type="checkbox" id="menu-bar">
-            <label for="menu-bar" class="fas fa-bars"></label>
+/* ── Three.js Space Canvas ── */
+#space-canvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+}
 
-            <nav class="navbar">
-                <a href="home">Home</a>
-                <a href=#Guides>Guides</a>
-                <a href=#Issue>Raise an Issue</a>
-                <a href=#contact>Contact</a>
-            </nav>
-        </header>
-        
-        <!-- header section end-->
+/* ── Parallax Sections ── */
+.parallax-section {
+  transition: transform 0.1s linear;
+}
 
-        <!-- home section starts-->
-        <section class="home" id=#home>
-            <div class="content">
-                <h3>Welcome to FNA <span>Networking</span></h3> 
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                    Dignissimos voluptates consectetur doloremque dicta ratione 
-                    quod tempore atque, consequatur veritatis numquam sapiente officiis. 
-                    Adipisci quisquam tenetur dicta nam ducimus assumenda quasi.</p>
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 56px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+  background: rgba(15, 17, 21, 0.9); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-mark {
+  font-family: var(--sans); font-size: 1.2rem; color: var(--accent);
+  text-decoration: none; font-weight: 600; letter-spacing: -0.01em;
+}
+
+.nav-links { display: flex; gap: 1.75rem; list-style: none; }
+
+.nav-links a {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-muted); text-decoration: none;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text); margin: 5px 0; transition: 0.3s; }
+
+/* ── Layout ── */
+.container {
+  position: relative; z-index: 1;
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+}
+
+section { padding: 4.5rem 0; }
+
+/* ── Section Headers ── */
+.sh {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.sh-num {
+  font-family: var(--mono); font-size: 0.6rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 0.15em;
+  background: var(--accent-dim); padding: 0.25rem 0.6rem;
+  border-radius: 3px; border: 1px solid var(--border-accent);
+}
+
+.sh-title {
+  font-family: var(--sans); font-size: 1.6rem; color: var(--text);
+  font-weight: 600; letter-spacing: -0.02em;
+}
+
+.sh-line { flex: 1; height: 1px; background: var(--border); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 56px;
+}
+
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center; width: 100%;
+}
+
+.hero-left { position: relative; }
+
+.hero-photo-wrap {
+  width: 120px; height: 120px; border-radius: 50%; overflow: hidden;
+  margin-bottom: 1.25rem; position: relative;
+  border: 2px solid var(--border-accent);
+  box-shadow: 0 0 30px rgba(240, 198, 64, 0.15);
+}
+
+.hero-photo {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.hero-overline {
+  font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+
+.hero-overline::before {
+  content: ''; width: 2rem; height: 1px; background: var(--accent);
+}
+
+.hero-name {
+  font-family: var(--sans); font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1.05; color: var(--text); margin-bottom: 1.25rem;
+  font-weight: 700; letter-spacing: -0.04em;
+}
+
+.hero-name em { font-style: normal; color: var(--accent); font-weight: 300; }
+
+.hero-desc {
+  font-size: 1rem; color: var(--text-secondary);
+  max-width: 460px; margin-bottom: 2rem; line-height: 1.75;
+  font-weight: 300;
+}
+
+.hero-contacts {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1.5rem;
+}
+
+.hc-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.82rem; color: var(--text-muted);
+  text-decoration: none; transition: color 0.25s;
+}
+.hc-item:hover { color: var(--accent); }
+.hc-item svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+
+.hero-right {
+  display: flex; flex-direction: column; gap: 0;
+}
+
+/* ── Hero Reel ── */
+.hero-reel {
+  position: relative;
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border-accent);
+  background: var(--bg);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(240,198,64,0.06);
+}
+
+.reel-viewport {
+  position: relative; overflow: hidden;
+  aspect-ratio: 16/9;
+}
+
+.reel-track {
+  position: relative; width: 100%; height: 100%;
+}
+
+.reel-slide {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 0.8s ease;
+}
+
+.reel-slide.active { opacity: 1; }
+
+.reel-slide video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.reel-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2rem 1.25rem 1rem;
+  background: linear-gradient(transparent, rgba(15,17,21,0.85));
+  display: flex; flex-direction: column; gap: 0.25rem;
+}
+
+.reel-tag {
+  font-family: var(--mono); font-size: 0.58rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+}
+
+.reel-title {
+  font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+  color: var(--text); letter-spacing: -0.01em;
+}
+
+.reel-dots {
+  display: flex; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-elevated);
+}
+
+.reel-dot {
+  width: 28px; height: 3px; border-radius: 2px;
+  background: var(--text-muted); border: none; cursor: pointer;
+  transition: all 0.3s; opacity: 0.3;
+}
+
+.reel-dot.active {
+  background: var(--accent); opacity: 1; width: 40px;
+}
+
+.reel-label {
+  position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2;
+  font-family: var(--mono); font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); background: rgba(15,17,21,0.7);
+  backdrop-filter: blur(8px);
+  padding: 0.3rem 0.6rem; border-radius: 4px;
+  border: 1px solid var(--border-accent);
+}
+
+/* ── Reel progress bar ── */
+.reel-dot::after {
+  content: ''; display: block; height: 100%; width: 0%;
+  background: var(--accent); border-radius: 2px;
+  transition: none;
+}
+
+.reel-dot.active.ticking::after {
+  width: 100%;
+  transition: width 5s linear;
+}
+
+/* ── Publications ── */
+.pub-row {
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: 1.25rem; align-items: baseline;
+  padding: 1.25rem 0; border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.pub-row:first-child { border-top: 1px solid var(--border); }
+.pub-row:hover { background: var(--accent-glow); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+
+.pub-venue {
+  font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); white-space: nowrap;
+  background: var(--accent-dim); padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+
+.pub-info {}
+
+.pub-title {
+  font-family: var(--sans); font-size: 1.15rem; color: var(--text);
+  font-weight: 500; line-height: 1.35; letter-spacing: -0.01em;
+}
+
+.pub-meta {
+  font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;
+}
+.pub-meta strong { color: var(--text-secondary); font-weight: 500; }
+
+.pub-link {
+  font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+  color: var(--accent); text-decoration: none;
+  border: 1px solid var(--border-accent); padding: 0.3rem 0.6rem;
+  border-radius: 3px; white-space: nowrap;
+  transition: all 0.25s;
+}
+.pub-link:hover { background: var(--accent); color: var(--bg); }
+
+/* ── Projects ── */
+.proj-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.proj-card {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.5rem;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+
+.proj-card::after {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.proj-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
+.proj-card:hover::after { opacity: 1; }
+
+.proj-label {
+  font-family: var(--mono); font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.5rem;
+}
+
+.proj-name {
+  font-family: var(--sans); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+
+.proj-desc {
+  font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;
+  margin-bottom: 1rem; font-weight: 300;
+}
+
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+
+.proj-tag {
+  font-family: var(--mono); font-size: 0.6rem; font-weight: 500;
+  padding: 0.2rem 0.5rem; background: var(--accent-dim);
+  border-radius: 3px; color: var(--text-muted);
+}
+
+.proj-links { display: flex; gap: 0.5rem; }
+
+.proj-link {
+  font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+  color: var(--accent); text-decoration: none;
+  display: flex; align-items: center; gap: 0.35rem;
+  transition: opacity 0.25s;
+}
+.proj-link:hover { opacity: 0.7; }
+.proj-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+/* ── Project Videos ── */
+.proj-video-wrap {
+  position: relative; border-radius: 6px; overflow: hidden;
+  margin-bottom: 1rem; aspect-ratio: 16/9;
+  background: var(--bg); cursor: pointer;
+}
+
+.proj-video-wrap video {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; opacity: 0.7; transition: opacity 0.4s;
+}
+
+.proj-video-wrap:hover video { opacity: 1; }
+
+.proj-video-wrap .play-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(15,17,21,0.4);
+  transition: background 0.3s;
+  pointer-events: none;
+}
+
+.proj-video-wrap:hover .play-overlay { background: rgba(15,17,21,0.1); }
+
+.proj-video-wrap.playing .play-overlay { opacity: 0; }
+
+.play-btn {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(240, 198, 64, 0.9); border: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s, background 0.3s;
+  pointer-events: none;
+}
+
+.proj-video-wrap:hover .play-btn { transform: scale(1.1); }
+.proj-video-wrap.playing .play-btn { display: none; }
+
+.play-btn svg { width: 20px; height: 20px; fill: var(--bg); margin-left: 2px; }
+
+/* ── Experience ── */
+.exp-item {
+  display: grid; grid-template-columns: 180px 1fr;
+  gap: 2rem; padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-item:first-child { border-top: 1px solid var(--border); }
+
+.exp-when {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
+  color: var(--text-muted); letter-spacing: 0.05em;
+  padding-top: 0.3rem;
+}
+
+.exp-where {
+  font-family: var(--mono); font-size: 0.6rem;
+  color: var(--text-muted); margin-top: 0.2rem;
+  letter-spacing: 0.05em;
+}
+
+.exp-role {
+  font-family: var(--sans); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 0.15rem;
+}
+
+.exp-org { font-size: 0.9rem; color: var(--accent); margin-bottom: 0.6rem; font-weight: 500; }
+
+.exp-details { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+
+.exp-details li {
+  font-size: 0.85rem; color: var(--text-secondary); font-weight: 300;
+  padding-left: 1rem; position: relative;
+}
+.exp-details li::before {
+  content: ''; position: absolute; left: 0; top: 0.55em;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); opacity: 0.5;
+}
+
+/* ── Education ── */
+.edu-row {
+  display: grid; grid-template-columns: 180px 1fr;
+  gap: 2rem; padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.edu-row:first-child { border-top: 1px solid var(--border); }
+
+.edu-period {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
+  color: var(--text-muted); padding-top: 0.3rem;
+}
+
+.edu-degree {
+  font-family: var(--sans); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 0.1rem;
+}
+
+.edu-school { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+
+.edu-courses {
+  font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; font-weight: 300;
+}
+
+.edu-thesis-block {
+  margin-top: 0.6rem; padding: 0.6rem 0.8rem;
+  background: var(--accent-glow); border-left: 2px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+}
+
+.edu-thesis-label {
+  font-family: var(--mono); font-size: 0.58rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.15rem;
+}
+
+.edu-thesis-text { font-size: 0.82rem; color: var(--text-secondary); font-weight: 300; }
+
+/* ── Skills ── */
+.skills-layout {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+
+.sk-group { }
+
+.sk-label {
+  font-family: var(--mono); font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+}
+
+.sk-list { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.sk-item {
+  font-size: 0.82rem; color: var(--text-secondary); font-weight: 300;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+.sk-item::before {
+  content: ''; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--text-muted); flex-shrink: 0;
+}
+
+/* ── Languages ── */
+.lang-row {
+  display: flex; gap: 2.5rem; flex-wrap: wrap;
+}
+
+.lang-item { text-align: center; }
+
+.lang-name {
+  font-family: var(--sans); font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 0.15rem;
+}
+
+.lang-lvl {
+  font-family: var(--mono); font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+}
+
+/* ── Footer ── */
+footer {
+  position: relative; z-index: 2;
+  text-align: center; padding: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.footer-text {
+  font-family: var(--mono); font-size: 0.65rem;
+  color: var(--text-muted); letter-spacing: 0.1em;
+}
+
+/* ── Download Button ── */
+.dl-btn {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 100;
+  background: var(--accent); color: var(--bg); border: none;
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.7rem 1.25rem; border-radius: 6px; cursor: pointer;
+  display: flex; align-items: center; gap: 0.5rem;
+  transition: all 0.25s;
+  box-shadow: 0 4px 24px rgba(240, 198, 64, 0.25);
+}
+.dl-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(240, 198, 64, 0.35); }
+.dl-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.vis { opacity: 1; transform: none; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-right { order: -1; }
+  .exp-item, .edu-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .skills-layout { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  nav .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; background: rgba(15,17,21,0.97); flex-direction: column; padding: 1.5rem; gap: 1rem; border-bottom: 1px solid var(--border); }
+  nav .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+  .hero-contacts { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .skills-layout { grid-template-columns: 1fr; }
+  .hero-reel { display: none; }
+  section { padding: 3rem 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   PRINT — SINGLE A4 PAGE
+   ═══════════════════════════════════════════════ */
+@media print {
+  @page { size: A4; margin: 8mm 10mm 6mm 10mm; }
+
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  :root {
+    --bg: #fff; --bg-elevated: #f7f8fa; --bg-card: #f7f8fa;
+    --accent: #a07800; --accent-dim: rgba(160,120,0,0.07);
+    --text: #1a1a1a; --text-secondary: #444; --text-muted: #666;
+    --border: #ddd; --border-accent: rgba(160,120,0,0.25);
+  }
+
+  body { font-size: 7pt; line-height: 1.3; background: #fff; color: #1a1a1a; }
+
+  #space-canvas, nav, .dl-btn, .hero-right, footer, .parallax-section { transform: none !important; }
+  #space-canvas, nav, .dl-btn, .hero-right, footer { display: none !important; }
+
+  .container { max-width: 100%; padding: 0; }
+  .reveal { opacity: 1; transform: none; }
+
+  /* Hero — compact header */
+  .hero { min-height: auto; padding: 0; margin-bottom: 0; }
+  section { padding: 0; }
+
+  .hero-grid { display: block; }
+  .hero-photo-wrap { display: none !important; }
+  .hero-overline { display: none; }
+
+  .hero-name {
+    font-size: 16pt; margin-bottom: 1pt;
+    color: #1a1a1a; -webkit-text-fill-color: #1a1a1a;
+    letter-spacing: -0.02em;
+  }
+  .hero-name em { color: #a07800; }
+  .hero-name br { content: ' '; }
+  .hero-name br::after { content: ' '; }
+
+  .hero-desc {
+    font-size: 6.5pt; max-width: 100%; margin-bottom: 3pt;
+    color: #444; line-height: 1.25;
+  }
+
+  .hero-contacts {
+    display: flex; flex-wrap: wrap; gap: 2pt 10pt;
+    font-size: 6.5pt; margin-bottom: 4pt;
+    padding-bottom: 4pt; border-bottom: 0.5pt solid #ccc;
+  }
+  .hc-item { font-size: 6.5pt; gap: 2pt; color: #555; }
+  .hc-item svg { width: 7px; height: 7px; }
+
+  /* Section Headers */
+  .sh { margin-bottom: 3pt; margin-top: 5pt; gap: 3pt; }
+  .sh-num { font-size: 4.5pt; padding: 0.5pt 2.5pt; }
+  .sh-title { font-size: 8.5pt; }
+  .sh-line { display: none; }
+
+  /* Publications — compact table */
+  .pub-row {
+    display: grid; grid-template-columns: 55pt 1fr auto;
+    gap: 3pt; padding: 2pt 0; border-bottom: 0.3pt solid #eee;
+    margin: 0;
+  }
+  .pub-row:first-child { border-top: 0.3pt solid #eee; }
+  .pub-row:hover { background: none; margin: 0; padding-left: 0; padding-right: 0; }
+  .pub-venue { font-size: 5pt; padding: 0.5pt 2pt; }
+  .pub-title { font-size: 6.5pt; line-height: 1.2; }
+  .pub-meta { font-size: 5.5pt; margin-top: 0; }
+  .pub-link {
+    font-size: 5pt; padding: 0.5pt 2.5pt;
+    color: #a07800; text-decoration: underline;
+  }
+
+  /* Projects — no videos, compact cards with links */
+  .proj-video-wrap { display: none !important; }
+  .proj-grid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 3pt; }
+  .proj-card {
+    padding: 3pt; border: 0.3pt solid #ddd;
+    border-radius: 1pt; page-break-inside: avoid;
+  }
+  .proj-card::after { display: none; }
+  .proj-card:hover { transform: none; }
+  .proj-label { font-size: 4pt; margin-bottom: 0.5pt; }
+  .proj-name { font-size: 6.5pt; margin-bottom: 1pt; }
+  .proj-desc { font-size: 5.5pt; margin-bottom: 1.5pt; line-height: 1.2; }
+  .proj-tags { gap: 1pt; margin-bottom: 1.5pt; }
+  .proj-tag { font-size: 4pt; padding: 0.5pt 1.5pt; }
+  .proj-links { gap: 2pt; }
+  .proj-link { font-size: 5pt; color: #a07800; }
+  .proj-link svg { width: 6px; height: 6px; }
+
+  /* Experience — tight */
+  .exp-item {
+    display: grid; grid-template-columns: 72pt 1fr;
+    gap: 3pt; padding: 2pt 0; border-bottom: 0.3pt solid #eee;
+  }
+  .exp-item:first-child { border-top: 0.3pt solid #eee; }
+  .exp-when { font-size: 5.5pt; padding-top: 0.5pt; }
+  .exp-where { font-size: 5pt; }
+  .exp-role { font-size: 7pt; margin-bottom: 0; }
+  .exp-org { font-size: 6pt; margin-bottom: 1pt; }
+  .exp-details li { font-size: 5.5pt; padding-left: 5pt; line-height: 1.25; }
+  .exp-details li::before { width: 1.5px; height: 1.5px; top: 0.5em; }
+  .exp-details { gap: 0.5pt; }
+
+  /* Education — tight */
+  .edu-row {
+    display: grid; grid-template-columns: 72pt 1fr;
+    gap: 3pt; padding: 2pt 0; border-bottom: 0.3pt solid #eee;
+  }
+  .edu-row:first-child { border-top: 0.3pt solid #eee; }
+  .edu-period { font-size: 5.5pt; padding-top: 0.5pt; }
+  .edu-degree { font-size: 7pt; }
+  .edu-school { font-size: 6pt; margin-bottom: 0.5pt; }
+  .edu-courses { font-size: 5.5pt; line-height: 1.2; }
+  .edu-thesis-block { margin-top: 1.5pt; padding: 1.5pt 3pt; }
+  .edu-thesis-label { font-size: 4.5pt; }
+  .edu-thesis-text { font-size: 5.5pt; }
+
+  /* Skills */
+  .skills-layout { grid-template-columns: 1fr 1fr 1fr 1fr; gap: 3pt; }
+  .sk-label { font-size: 5pt; margin-bottom: 2pt; padding-bottom: 1.5pt; }
+  .sk-item { font-size: 5.5pt; gap: 1.5pt; }
+  .sk-item::before { width: 1.5px; height: 1.5px; }
+  .sk-list { gap: 0.5pt; }
+
+  /* Languages — single row */
+  #languages { margin-top: 3pt; }
+  .lang-row { gap: 10pt; }
+  .lang-name { font-size: 7pt; }
+  .lang-lvl { font-size: 5pt; }
+
+  /* Force links to show URL in print */
+  .pub-link, .proj-link { color: #a07800 !important; }
+}
+</style>
+</head>
+<body>
+<canvas id="space-canvas"></canvas>
+
+<nav>
+  <a href="#" class="nav-mark">HKG</a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-photo-wrap">
+          <img src="hari_cv.jpg" alt="Hari Krishna Gadi" class="hero-photo">
+        </div>
+        <div class="hero-overline">PhD Researcher</div>
+        <h1 class="hero-name">Hari Krishna<br><em>Gadi</em></h1>
+        <p class="hero-desc">
+          AI Researcher at Huawei Technologies with first-author publications at ICLR and SIGSPATIAL. Building deep learning systems spanning computer vision, hyperbolic representation learning, and LLM evaluation.
+        </p>
+        <div class="hero-contacts">
+          <a href="mailto:harikrishna.gadi@tum.de" class="hc-item">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            harikrishna.gadi@tum.de
+          </a>
+          <a href="tel:+4915129752881" class="hc-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +49 151 2975 2881
+          </a>
+          <a href="https://www.linkedin.com/in/hari-krishna-gadi-b75567138/" target="_blank" class="hc-item">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <span class="hc-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Munich, Germany
+          </span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-reel">
+          <div class="reel-viewport">
+            <div class="reel-track">
+              <div class="reel-slide active">
+                <video src="hierloc_ad.mp4" muted loop playsinline preload="metadata"></video>
+                <div class="reel-caption">
+                  <span class="reel-tag">ICLR 2026</span>
+                  <span class="reel-title">HierLoc — Geolocation in Hyperbolic Space</span>
+                </div>
+              </div>
+              <div class="reel-slide">
+                <video src="DMS_proactive_demo.mp4" muted loop playsinline preload="metadata"></video>
+                <div class="reel-caption">
+                  <span class="reel-tag">Huawei</span>
+                  <span class="reel-title">DMS Proactive Safety Agent</span>
+                </div>
+              </div>
+              <div class="reel-slide">
+                <video src="proactive_caller_assistant.mp4" muted loop playsinline preload="metadata"></video>
+                <div class="reel-caption">
+                  <span class="reel-tag">Huawei</span>
+                  <span class="reel-title">Proactive Caller Assistant</span>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="reel-dots">
+            <button class="reel-dot active" data-idx="0"></button>
+            <button class="reel-dot" data-idx="1"></button>
+            <button class="reel-dot" data-idx="2"></button>
+          </div>
+          <div class="reel-label">Research Demos</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <div class="image">
-                <img src="images/people1.svg" alt="" >
-            </div>
-        </section>
-        <!-- home section ends-->
+  <!-- ═══ PUBLICATIONS ═══ -->
+  <section id="publications" class="parallax-section" data-speed="0.03">
+    <div class="sh reveal">
+      <span class="sh-num">01</span>
+      <span class="sh-title">Publications</span>
+      <span class="sh-line"></span>
+    </div>
+    <div class="pub-row reveal">
+      <span class="pub-venue">ICLR '26</span>
+      <div class="pub-info">
+        <div class="pub-title">HierLoc: Image-Based Geolocation Trained in Hyperbolic Space</div>
+        <div class="pub-meta"><strong>First Author</strong> &middot; Full paper, Rio de Janeiro</div>
+      </div>
+      <a href="https://arxiv.org/abs/2601.23064" target="_blank" class="pub-link">arXiv</a>
+    </div>
+    <div class="pub-row reveal">
+      <span class="pub-venue">SIGSPATIAL '24</span>
+      <div class="pub-info">
+        <div class="pub-title">Road Networks Matching Using Embeddings</div>
+        <div class="pub-meta"><strong>First Author</strong> &middot; SOTA results, Atlanta, USA</div>
+      </div>
+      <a href="https://dl.acm.org/doi/epdf/10.1145/3687123.3698283" target="_blank" class="pub-link">ACM</a>
+    </div>
+    <div class="pub-row reveal">
+      <span class="pub-venue">EMNLP '25</span>
+      <div class="pub-info">
+        <div class="pub-title">Turnback: Evaluation of GeoSpatial Cognition of Current LLMs</div>
+        <div class="pub-meta"><strong>Co-Author</strong></div>
+      </div>
+      <a href="https://arxiv.org/abs/2509.18173" target="_blank" class="pub-link">arXiv</a>
+    </div>
+    <div class="pub-row reveal">
+      <span class="pub-venue">IBPSA '21</span>
+      <div class="pub-info">
+        <div class="pub-title">Occupant Behaviour Prediction Using Deep Learning and a Variety of Data Sources</div>
+        <div class="pub-meta"><strong>Co-Author</strong> &middot; Building Simulation 2021, Bruges</div>
+      </div>
+      <a href="https://publications.ibpsa.org/conference/paper/?id=bs2021_30345" target="_blank" class="pub-link">IBPSA</a>
+    </div>
+  </section>
 
+  <!-- ═══ PROJECTS ═══ -->
+  <section id="projects" class="parallax-section" data-speed="0.05">
+    <div class="sh reveal">
+      <span class="sh-num">02</span>
+      <span class="sh-title">Projects</span>
+      <span class="sh-line"></span>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-video-wrap" onclick="toggleVideo(this)">
+          <video src="hierloc_ad.mp4" muted loop playsinline preload="metadata"></video>
+          <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="proj-label">Research &middot; ICLR 2026</div>
+        <div class="proj-name">HierLoc</div>
+        <div class="proj-desc">Hierarchical image geolocation using hyperbolic embeddings. Learns location hierarchy (continent &rarr; country &rarr; city) in curved space for more natural geographic reasoning.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">PyTorch</span>
+          <span class="proj-tag">Hyperbolic Geometry</span>
+          <span class="proj-tag">Vision Transformers</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://harikrishnagadi.github.io/iclr-website/" target="_blank" class="proj-link">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            Project Site
+          </a>
+          <a href="https://arxiv.org/abs/2601.23064" target="_blank" class="proj-link">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Paper
+          </a>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-label">Research &middot; SIGSPATIAL 2024</div>
+        <div class="proj-name">Road Network Matching</div>
+        <div class="proj-desc">Embedding-based approach for matching road networks across different map sources, achieving state-of-the-art results on conflation benchmarks.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Graph Neural Networks</span>
+          <span class="proj-tag">Embeddings</span>
+          <span class="proj-tag">PostGIS</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://dl.acm.org/doi/epdf/10.1145/3687123.3698283" target="_blank" class="proj-link">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Paper
+          </a>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-video-wrap" onclick="toggleVideo(this)">
+          <video src="proactive_caller_assistant.mp4" muted loop playsinline preload="metadata"></video>
+          <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="proj-label">Proactive Agents &middot; Huawei</div>
+        <div class="proj-name">Proactive Caller Assistant</div>
+        <div class="proj-desc">Context-aware AI agent that proactively assists during phone calls with relevant information, calendar context, and smart suggestions across devices.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Proactive AI</span>
+          <span class="proj-tag">Multi-Device</span>
+          <span class="proj-tag">HarmonyOS</span>
+        </div>
+        <div class="proj-links">
+          <a href="pagents.html" class="proj-link">
+            <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Full Demo
+          </a>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-video-wrap" onclick="toggleVideo(this)">
+          <video src="DMS_proactive_demo.mp4" muted loop playsinline preload="metadata"></video>
+          <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="proj-label">Proactive Agents &middot; Huawei</div>
+        <div class="proj-name">DMS Proactive Safety</div>
+        <div class="proj-desc">Driver monitoring system with proactive safety interventions — fatigue detection, cognitive load estimation, and context-aware alerts using in-cabin sensors.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Computer Vision</span>
+          <span class="proj-tag">DMS</span>
+          <span class="proj-tag">Real-time</span>
+        </div>
+        <div class="proj-links">
+          <a href="pagents.html" class="proj-link">
+            <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Full Demo
+          </a>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-label">Research &middot; EMNLP 2025</div>
+        <div class="proj-name">Turnback</div>
+        <div class="proj-desc">Benchmark for evaluating geospatial cognition in large language models, testing spatial reasoning, navigation, and geographic understanding.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">LLM Evaluation</span>
+          <span class="proj-tag">Geospatial</span>
+          <span class="proj-tag">Benchmarking</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://arxiv.org/abs/2509.18173" target="_blank" class="proj-link">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Paper
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <script src="" async defer></script>
-    </body>
+  <!-- ═══ EXPERIENCE ═══ -->
+  <section id="experience" class="parallax-section" data-speed="0.04">
+    <div class="sh reveal">
+      <span class="sh-num">03</span>
+      <span class="sh-title">Experience</span>
+      <span class="sh-line"></span>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-when">Dec 2022 — Present</div>
+        <div class="exp-where">Munich, Germany</div>
+      </div>
+      <div>
+        <div class="exp-role">PhD Researcher</div>
+        <div class="exp-org">Huawei Technologies Ltd</div>
+        <ul class="exp-details">
+          <li>First-author papers at ICLR'26 (hyperbolic geolocation) and SIGSPATIAL'24 (road network matching)</li>
+          <li>Co-authored LLM geospatial evaluation benchmark at EMNLP'25</li>
+          <li>GPU cluster setup and administration with private networking</li>
+          <li>Rust development of PostgreSQL extension for geospatial workloads</li>
+          <li>Designed proactive AI agents for multi-device personal assistance</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-when">Jan 2022 — Jul 2022</div>
+        <div class="exp-where">Munich, Germany</div>
+      </div>
+      <div>
+        <div class="exp-role">Research Intern / Thesis</div>
+        <div class="exp-org">Huawei Technologies, Munich Research Centre</div>
+        <ul class="exp-details">
+          <li>Evaluated state-of-the-art road network conflation methods</li>
+          <li>Compared traditional and optimisation-based data conflation approaches</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-when">Jan 2020 — Jun 2022</div>
+        <div class="exp-where">Munich, Germany</div>
+      </div>
+      <div>
+        <div class="exp-role">Student Research Assistant</div>
+        <div class="exp-org">TU Munich — Institute of Energy Efficient and Sustainable Design</div>
+        <ul class="exp-details">
+          <li>ML models for occupant behaviour prediction in buildings</li>
+          <li>CityGML LOD2 Rhino plugin development in Python</li>
+          <li>3D point cloud processing (CloudCompare, FME)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-when">Dec 2018 — Sep 2019</div>
+        <div class="exp-where">Hyderabad, India</div>
+      </div>
+      <div>
+        <div class="exp-role">GIS Data Analyst & Developer</div>
+        <div class="exp-org">StanPlus Technologies Pvt Ltd</div>
+        <ul class="exp-details">
+          <li>Full-stack GIS web application (JavaScript, Node.js, PostGIS, GDAL)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-when">May 2018 — Jun 2018</div>
+        <div class="exp-where">Vijayawada, India</div>
+      </div>
+      <div>
+        <div class="exp-role">React Native & GIS Developer</div>
+        <div class="exp-org">Andhra Pradesh Space Application Centre</div>
+        <ul class="exp-details">
+          <li>Android GIS app (React Native) and backend (Node.js, PostGIS)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EDUCATION ═══ -->
+  <section id="education" class="parallax-section" data-speed="0.03">
+    <div class="sh reveal">
+      <span class="sh-num">04</span>
+      <span class="sh-title">Education</span>
+      <span class="sh-line"></span>
+    </div>
+
+    <div class="edu-row reveal">
+      <div class="edu-period">Sep 2019 — Jul 2022</div>
+      <div>
+        <div class="edu-degree">M.Sc. Geodesy & Geoinformation</div>
+        <div class="edu-school">Technische Universitat Munchen</div>
+        <div class="edu-courses">
+          Deep CNNs &middot; Kalman Filter &middot; Optimisation Theory &middot; GNSS &middot;
+          Signal Analysis &middot; Image Processing &middot; Machine Learning &middot; Photogrammetry
+        </div>
+        <div class="edu-thesis-block">
+          <div class="edu-thesis-label">Thesis</div>
+          <div class="edu-thesis-text">Road Network Conflation: State-of-the-Art Methods Evaluation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-row reveal">
+      <div class="edu-period">Jun 2015 — Apr 2019</div>
+      <div>
+        <div class="edu-degree">B.Tech. Geoinformatics</div>
+        <div class="edu-school">Andhra University</div>
+        <div class="edu-courses">
+          GIS &middot; Remote Sensing &middot; ML &middot; AI Theory &middot; Web Dev &middot;
+          DBMS &middot; Cartography &middot; Java &middot; C++ &middot; Python
+        </div>
+        <div class="edu-thesis-block">
+          <div class="edu-thesis-label">Project</div>
+          <div class="edu-thesis-text">Real-time traffic analysis via YOLO transfer learning</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section id="skills" class="parallax-section" data-speed="0.05">
+    <div class="sh reveal">
+      <span class="sh-num">05</span>
+      <span class="sh-title">Skills</span>
+      <span class="sh-line"></span>
+    </div>
+    <div class="skills-layout reveal">
+      <div class="sk-group">
+        <div class="sk-label">Programming</div>
+        <div class="sk-list">
+          <div class="sk-item">Python</div>
+          <div class="sk-item">C++</div>
+          <div class="sk-item">Rust</div>
+          <div class="sk-item">JavaScript</div>
+          <div class="sk-item">SQL</div>
+          <div class="sk-item">Java</div>
+          <div class="sk-item">AI Programming</div>
+        </div>
+      </div>
+      <div class="sk-group">
+        <div class="sk-label">ML & Research</div>
+        <div class="sk-list">
+          <div class="sk-item">Agentic AI</div>
+          <div class="sk-item">Deep Learning</div>
+          <div class="sk-item">Computer Vision</div>
+          <div class="sk-item">Hyperbolic ML</div>
+          <div class="sk-item">Multimodal</div>
+          <div class="sk-item">Proactive Agents</div>
+        </div>
+      </div>
+      <div class="sk-group">
+        <div class="sk-label">Infrastructure</div>
+        <div class="sk-list">
+          <div class="sk-item">Docker</div>
+          <div class="sk-item">Linux</div>
+          <div class="sk-item">GPU Clusters</div>
+          <div class="sk-item">PostgreSQL / PostGIS</div>
+          <div class="sk-item">Node.js</div>
+          <div class="sk-item">MLOps</div>
+          <div class="sk-item">System Architecture</div>
+        </div>
+      </div>
+      <div class="sk-group">
+        <div class="sk-label">Geospatial</div>
+        <div class="sk-list">
+          <div class="sk-item">GIS / QGIS / ArcGIS</div>
+          <div class="sk-item">GDAL</div>
+          <div class="sk-item">Remote Sensing</div>
+          <div class="sk-item">GNSS</div>
+          <div class="sk-item">Point Clouds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LANGUAGES ═══ -->
+  <section id="languages" class="parallax-section" data-speed="0.04">
+    <div class="sh reveal">
+      <span class="sh-num">06</span>
+      <span class="sh-title">Languages</span>
+      <span class="sh-line"></span>
+    </div>
+    <div class="lang-row reveal">
+      <div class="lang-item">
+        <div class="lang-name">Telugu</div>
+        <div class="lang-lvl">Native</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">Hindi</div>
+        <div class="lang-lvl">Native</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">English</div>
+        <div class="lang-lvl">C1 — Advanced</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">German</div>
+        <div class="lang-lvl">B2 — Upper Intermediate</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<a href="Hari_Krishna_Gadi_CV.pdf" download class="dl-btn" title="Download CV">
+  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  Download CV
+</a>
+
+<footer>
+  <div class="footer-text">48.1351&deg;N &middot; 11.5820&deg;E &middot; Munich, Germany</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ═══ THREE.JS SPACE SCENE ═══
+(function() {
+  const canvas = document.getElementById('space-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+  camera.position.z = 50;
+
+  let scrollY = 0;
+  let mouseX = 0, mouseY = 0;
+
+  // ── Stars (particles) ──
+  const starCount = 3000;
+  const starGeo = new THREE.BufferGeometry();
+  const starPos = new Float32Array(starCount * 3);
+  const starSizes = new Float32Array(starCount);
+  const starColors = new Float32Array(starCount * 3);
+
+  for (let i = 0; i < starCount; i++) {
+    starPos[i * 3] = (Math.random() - 0.5) * 600;
+    starPos[i * 3 + 1] = (Math.random() - 0.5) * 600;
+    starPos[i * 3 + 2] = (Math.random() - 0.5) * 600;
+    starSizes[i] = Math.random() * 2.5 + 0.5;
+    // Teal-white color mix
+    const tint = Math.random();
+    if (tint > 0.85) {
+      starColors[i * 3] = 0.94; starColors[i * 3 + 1] = 0.78; starColors[i * 3 + 2] = 0.25; // yellow
+    } else if (tint > 0.7) {
+      starColors[i * 3] = 0.7; starColors[i * 3 + 1] = 0.85; starColors[i * 3 + 2] = 1.0; // blue-white
+    } else {
+      const b = 0.7 + Math.random() * 0.3;
+      starColors[i * 3] = b; starColors[i * 3 + 1] = b; starColors[i * 3 + 2] = b; // white
+    }
+  }
+
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  starGeo.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
+  starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+  const starMat = new THREE.ShaderMaterial({
+    uniforms: { time: { value: 0 } },
+    vertexShader: `
+      attribute float size;
+      attribute vec3 color;
+      varying vec3 vColor;
+      varying float vSize;
+      uniform float time;
+      void main() {
+        vColor = color;
+        vSize = size;
+        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+        float twinkle = sin(time * 2.0 + position.x * 10.0) * 0.3 + 0.7;
+        gl_PointSize = size * (200.0 / -mvPos.z) * twinkle;
+        gl_Position = projectionMatrix * mvPos;
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vColor;
+      void main() {
+        float d = length(gl_PointCoord - vec2(0.5));
+        if (d > 0.5) discard;
+        float alpha = 1.0 - smoothstep(0.1, 0.5, d);
+        float glow = exp(-d * 6.0) * 0.5;
+        gl_FragColor = vec4(vColor, (alpha + glow) * 0.9);
+      }
+    `,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  // ── Distant star clusters (smaller, denser) ──
+  const clusterCount = 1500;
+  const clusterGeo = new THREE.BufferGeometry();
+  const clusterPos = new Float32Array(clusterCount * 3);
+  for (let i = 0; i < clusterCount; i++) {
+    clusterPos[i * 3] = (Math.random() - 0.5) * 1000;
+    clusterPos[i * 3 + 1] = (Math.random() - 0.5) * 1000;
+    clusterPos[i * 3 + 2] = -200 - Math.random() * 500;
+  }
+  clusterGeo.setAttribute('position', new THREE.BufferAttribute(clusterPos, 3));
+  const clusterMat = new THREE.PointsMaterial({
+    color: 0x667799, size: 0.8, transparent: true, opacity: 0.4,
+    blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  const clusters = new THREE.Points(clusterGeo, clusterMat);
+  scene.add(clusters);
+
+  // ── Nebula clouds (large transparent spheres) ──
+  function createNebula(x, y, z, radius, color, opacity) {
+    const geo = new THREE.SphereGeometry(radius, 32, 32);
+    const mat = new THREE.MeshBasicMaterial({
+      color: color, transparent: true, opacity: opacity,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(x, y, z);
+    return mesh;
+  }
+
+  const nebulae = [
+    createNebula(-80, 40, -200, 60, 0x8a7020, 0.03),
+    createNebula(100, -60, -300, 80, 0x0d3d56, 0.025),
+    createNebula(50, 80, -250, 50, 0xf0c640, 0.015),
+    createNebula(-120, -80, -180, 45, 0x1a3a5c, 0.02),
+  ];
+  nebulae.forEach(n => scene.add(n));
+
+  // ── Planets ──
+  function createPlanet(radius, color, emissiveColor, x, y, z, ringColor) {
+    const group = new THREE.Group();
+
+    const geo = new THREE.SphereGeometry(radius, 64, 64);
+    const mat = new THREE.MeshStandardMaterial({
+      color: color, emissive: emissiveColor, emissiveIntensity: 0.15,
+      roughness: 0.7, metalness: 0.3
+    });
+    const planet = new THREE.Mesh(geo, mat);
+    group.add(planet);
+
+    // Ring
+    if (ringColor) {
+      const ringGeo = new THREE.RingGeometry(radius * 1.4, radius * 2.0, 64);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: ringColor, side: THREE.DoubleSide,
+        transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending
+      });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI * 0.4;
+      group.add(ring);
+    }
+
+    group.position.set(x, y, z);
+    group.userData = { baseY: y, rotSpeed: 0.002 + Math.random() * 0.003 };
+    return group;
+  }
+
+  const planets = [
+    createPlanet(8, 0x8a7020, 0xf0c640, -90, -30, -120, 0xf0c640),    // teal planet with ring
+    createPlanet(5, 0x2a3a5c, 0x4477aa, 120, 50, -180, null),           // blue planet
+    createPlanet(3, 0x3d2a1a, 0xcc8844, 60, -80, -150, null),           // amber moon
+    createPlanet(12, 0x1a1a2e, 0x223355, -40, 90, -280, 0x334466),      // dark giant with ring
+  ];
+  planets.forEach(p => scene.add(p));
+
+  // ── Lighting ──
+  const ambient = new THREE.AmbientLight(0x223344, 0.5);
+  scene.add(ambient);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(50, 30, 50);
+  scene.add(dirLight);
+
+  const pointLight = new THREE.PointLight(0xf0c640, 0.6, 300);
+  pointLight.position.set(-50, 20, 0);
+  scene.add(pointLight);
+
+  // ── Shooting stars ──
+  const shootingStars = [];
+  function spawnShootingStar() {
+    const geo = new THREE.BufferGeometry();
+    const len = 8 + Math.random() * 12;
+    const positions = new Float32Array(6);
+    positions[0] = 0; positions[1] = 0; positions[2] = 0;
+    positions[3] = -len; positions[4] = -len * 0.3; positions[5] = 0;
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const mat = new THREE.LineBasicMaterial({
+      color: 0xf0c640, transparent: true, opacity: 0.7,
+      blending: THREE.AdditiveBlending
+    });
+    const line = new THREE.Line(geo, mat);
+    line.position.set(
+      (Math.random() - 0.5) * 300,
+      100 + Math.random() * 100,
+      -50 - Math.random() * 200
+    );
+    line.userData = {
+      speed: 3 + Math.random() * 4,
+      life: 1.0
+    };
+    scene.add(line);
+    shootingStars.push(line);
+  }
+
+  setInterval(() => { if (Math.random() > 0.5) spawnShootingStar(); }, 3000);
+
+  // ── Events ──
+  window.addEventListener('scroll', () => { scrollY = window.pageYOffset; });
+  window.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ── Animation Loop ──
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    starMat.uniforms.time.value = t;
+
+    // Scroll-driven camera movement (parallax with space)
+    const scrollNorm = scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+    camera.position.y = -scrollY * 0.02;
+    camera.position.z = 50 - scrollNorm * 30;
+    camera.rotation.x = scrollY * 0.00005;
+
+    // Mouse parallax
+    camera.position.x += (mouseX * 5 - camera.position.x) * 0.02;
+    camera.position.y += (-mouseY * 3 - scrollY * 0.02 - camera.position.y) * 0.02;
+
+    // Rotate stars slowly
+    stars.rotation.y = t * 0.01;
+    stars.rotation.x = t * 0.005;
+    clusters.rotation.y = -t * 0.003;
+
+    // Planets orbit and bob
+    planets.forEach((p, i) => {
+      p.rotation.y = t * p.userData.rotSpeed;
+      p.children[0].rotation.y = t * 0.1;
+      p.position.y = p.userData.baseY + Math.sin(t * 0.3 + i * 2) * 3;
+    });
+
+    // Nebulae pulse
+    nebulae.forEach((n, i) => {
+      n.material.opacity = 0.02 + Math.sin(t * 0.2 + i) * 0.01;
+      n.scale.setScalar(1 + Math.sin(t * 0.15 + i * 1.5) * 0.05);
+    });
+
+    // Shooting stars
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const s = shootingStars[i];
+      s.position.x += s.userData.speed;
+      s.position.y -= s.userData.speed * 0.3;
+      s.userData.life -= 0.015;
+      s.material.opacity = s.userData.life * 0.7;
+      if (s.userData.life <= 0) {
+        scene.remove(s);
+        s.geometry.dispose();
+        s.material.dispose();
+        shootingStars.splice(i, 1);
+      }
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+})();
+
+// ═══ PARALLAX SECTIONS ═══
+(function() {
+  const sections = document.querySelectorAll('.parallax-section');
+  function updateParallax() {
+    const scrollY = window.pageYOffset;
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const viewCenter = window.innerHeight / 2;
+      const offset = (center - viewCenter) * parseFloat(sec.dataset.speed || 0.03);
+      sec.style.transform = `translateY(${offset}px)`;
+    });
+    requestAnimationFrame(updateParallax);
+  }
+  updateParallax();
+})();
+
+// ═══ HERO REEL ═══
+const slides = document.querySelectorAll('.reel-slide');
+const dots = document.querySelectorAll('.reel-dot');
+let current = 0;
+let reelTimer;
+
+function goToSlide(idx) {
+  slides[current].classList.remove('active');
+  slides[current].querySelector('video').pause();
+  dots[current].classList.remove('active', 'ticking');
+  current = idx;
+  slides[current].classList.add('active');
+  slides[current].querySelector('video').currentTime = 0;
+  slides[current].querySelector('video').play().catch(() => {});
+  dots[current].classList.add('active');
+  requestAnimationFrame(() => { dots[current].classList.add('ticking'); });
+}
+
+function nextSlide() { goToSlide((current + 1) % slides.length); }
+
+function startReel() {
+  clearInterval(reelTimer);
+  reelTimer = setInterval(nextSlide, 5000);
+}
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => { goToSlide(parseInt(dot.dataset.idx)); startReel(); });
+});
+
+if (slides.length > 0) {
+  slides[0].querySelector('video').play().catch(() => {});
+  dots[0].classList.add('ticking');
+  startReel();
+}
+
+// ═══ PROJECT VIDEO TOGGLE ═══
+function toggleVideo(wrap) {
+  const vid = wrap.querySelector('video');
+  if (vid.paused) { vid.play(); wrap.classList.add('playing'); }
+  else { vid.pause(); wrap.classList.remove('playing'); }
+}
+
+const vidObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    const vid = e.target.querySelector('video');
+    if (!vid) return;
+    if (e.isIntersecting) { vid.play().catch(() => {}); e.target.classList.add('playing'); }
+    else { vid.pause(); e.target.classList.remove('playing'); }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.proj-video-wrap').forEach(el => vidObs.observe(el));
+
+// ═══ REVEAL ON SCROLL ═══
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Mobile nav
+function closeNav() { document.querySelector('.nav-links').classList.remove('open'); }
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', closeNav));
+</script>
+</body>
 </html>
